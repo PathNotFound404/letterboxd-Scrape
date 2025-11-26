@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.FileWriter;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,24 +15,50 @@ import org.jsoup.select.Elements;
 public class Scrape {
     public static void main(String[] args) {
         String username = "PathFound404";
-        String url = "https://letterboxd.com/"+ username +"/films";
+        String url = "https://letterboxd.com/"+ username +"/films/size/large";
         
-        try{
-            Document doc = Jsoup.connect(url).get();
-            
-            List<Movie> movies = extractMovies(doc);
+            List<Movie> movies = extractMovies(url);
 
             for (Movie movie : movies){
-                System.out.println(movie.getName() + "     " + movie.getRating());
+                System.out.println(movie.getName() + "------" + movie.getRating());
             }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+        
     }
 
 
-    public static List<Movie> extractMovies(Document doc) {
+
+    public static List<Movie> extractMovies(String baseURL){
         List<Movie> movies = new ArrayList<>();
+
+        int page = 1;
+        boolean hasNextPage = true;
+
+        while (hasNextPage) {
+            String url = baseURL + "/page/" + String.valueOf(page);
+
+            try {
+                Document doc = Jsoup.connect(url).get();
+                List<Movie> pageMovies= extractPage(doc);
+
+                if(pageMovies.isEmpty()){
+                    hasNextPage = false;
+                }else {
+                    movies.addAll(pageMovies);
+                    page++;
+                }
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+        }
+
+
+        return movies;
+    }
+
+    public static List<Movie> extractPage(Document doc) {
+        List<Movie> pageMovies = new ArrayList<>();
 
         //Get all grid items with movie data
         Elements gridItems = doc.select("li.griditem");
@@ -43,7 +71,7 @@ public class Scrape {
                 //Extract Rating 
                 Double rating = 0.0;
 
-                Element ratingElement = gridItem.selectFirst("span.rating.-micro.-darker");
+                Element ratingElement = gridItem.selectFirst("span.rating");
             
                 if(ratingElement != null){
                     String classAttr = ratingElement.className();
@@ -51,9 +79,9 @@ public class Scrape {
                         rating = Double.parseDouble(classAttr.split("rated-")[1].split(" ")[0]);
                     }
                 }
-                movies.add(new Movie(movieName, rating/2));
+                pageMovies.add(new Movie(movieName, rating/2));
             }
         }
-        return movies;
+        return pageMovies;
     }
 }
