@@ -13,17 +13,23 @@ import org.jsoup.select.Elements;
 
 
 public class Scrape {
-    public static void main(String[] args) {
-        String username = "PathFound404";
-        String url = "https://letterboxd.com/"+ username +"/films/size/large";
+    // public static void main(String[] args) {
+    //     String username = "PathFound404";
+    //     String url = "https://letterboxd.com/"+ username +"/films/size/large";
         
-            List<Movie> movies = extractMovies(url);
+    //         List<Movie> movies = extractMovies(url);
+    //         User user = new User(username, new ArrayList<>(movies));
 
-            for (Movie movie : movies){
-                System.out.println(movie.getName() + "------" + movie.getRating());
-            }
+    //         for (Movie movie : movies){
+    //             System.out.println(movie.getName() + "------" + movie.getRating());
+    //         }
         
-    }
+    //         //Simple Output For A users movies
+    //         for(int i=0; i<user.getFilms().size(); i++){
+    //             Movie movie = user.getMovie(i);
+    //             System.out.println((i+1) + ". " + movie.getName() + " ------ " + movie.getRating());
+    //         }
+    // }
 
 
 
@@ -52,8 +58,7 @@ public class Scrape {
             }
             
         }
-
-
+ 
         return movies;
     }
 
