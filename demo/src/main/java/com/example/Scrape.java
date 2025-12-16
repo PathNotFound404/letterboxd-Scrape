@@ -84,7 +84,9 @@ public class Scrape {
                         rating = Double.parseDouble(classAttr.split("rated-")[1].split(" ")[0]);
                     }
                 }
-                pageMovies.add(new Movie(movieName, rating/2));
+                String movieLink = posterComponent.attr("data-item-link");
+
+                pageMovies.add(new Movie(movieName, rating/2, movieLink));
             }
         }
         return pageMovies;

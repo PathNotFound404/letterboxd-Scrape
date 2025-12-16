@@ -8,7 +8,6 @@ public class Main {
     
     public static void main(String[] args) {
         String[] users = {"PathFound404", "AlexTheAlex12"};
-        int i = 0;
         ArrayList<User> usersList = new ArrayList<>();
 
         for(String username : users){
@@ -20,7 +19,7 @@ public class Main {
             System.out.println("--------------" + u.getUsername() + "--------------");
 
             for(Movie movie : u.getFilms()){
-                System.out.println((movie.getName() + "------" + movie.getRating()));
+                System.out.println((movie.getName() + "------" + movie.getRating() + "------" + movie.getLink()));
             }
 
             
