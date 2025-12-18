@@ -1,10 +1,7 @@
 package com.example;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.io.FileWriter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

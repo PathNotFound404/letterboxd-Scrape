@@ -1,0 +1,4 @@
+Searching for names to get a rating could be time intensivie O(n^2) 
+Storing movies in a hash or storing a tuple of (name, rating) would be ways to improve lookup time
+Keep these in mind to improve speed of displaying the output esspecialy for large sets
+ 
