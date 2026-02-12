@@ -1,10 +1,7 @@
 package com.example;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.io.FileWriter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,17 +10,23 @@ import org.jsoup.select.Elements;
 
 
 public class Scrape {
-    public static void main(String[] args) {
-        String username = "PathFound404";
-        String url = "https://letterboxd.com/"+ username +"/films/size/large";
+    // public static void main(String[] args) {
+    //     String username = "PathFound404";
+    //     String url = "https://letterboxd.com/"+ username +"/films/size/large";
         
-            List<Movie> movies = extractMovies(url);
+    //         List<Movie> movies = extractMovies(url);
+    //         User user = new User(username, new ArrayList<>(movies));
 
-            for (Movie movie : movies){
-                System.out.println(movie.getName() + "------" + movie.getRating());
-            }
+    //         for (Movie movie : movies){
+    //             System.out.println(movie.getName() + "------" + movie.getRating());
+    //         }
         
-    }
+    //         //Simple Output For A users movies
+    //         for(int i=0; i<user.getFilms().size(); i++){
+    //             Movie movie = user.getMovie(i);
+    //             System.out.println((i+1) + ". " + movie.getName() + " ------ " + movie.getRating());
+    //         }
+    // }
 
 
 
@@ -52,8 +55,7 @@ public class Scrape {
             }
             
         }
-
-
+ 
         return movies;
     }
 
@@ -79,7 +81,9 @@ public class Scrape {
                         rating = Double.parseDouble(classAttr.split("rated-")[1].split(" ")[0]);
                     }
                 }
-                pageMovies.add(new Movie(movieName, rating/2));
+                String movieLink = posterComponent.attr("data-item-link");
+
+                pageMovies.add(new Movie(movieName, rating/2, movieLink));
             }
         }
         return pageMovies;
