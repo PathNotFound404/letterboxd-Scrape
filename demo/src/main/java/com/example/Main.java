@@ -1,4 +1,7 @@
 package com.example;
+
+import org.openqa.selenium.WebDriver;
+
 import java.util.*;
 
 public class Main {
@@ -8,10 +11,13 @@ public class Main {
         String[] users = {"PathFound404", "AlexTheAlex12"};
         ArrayList<User> usersList = new ArrayList<>();
 
+
         for(String username : users){
+            WebDriver driver = Scrape.inintializeWebDriver();
             url = "https://letterboxd.com/"+ username +"/films";
-            User u = new User(username, new ArrayList<>(Scrape.extractMovies(url)));
+            User u = new User(username, new ArrayList<>(Scrape.getMovies(driver, url)));
             usersList.add(u);
+            driver.quit();
 
             //System.out.println("\n\n");
             //System.out.println("--------------" + u.getUsername() + "--------------");
@@ -20,7 +26,6 @@ public class Main {
             //     System.out.println((movie.getName() + " ------ " + movie.getRating() + " ------ " + movie.getLink()));
             // }
             System.out.println("Data Intialized");
-            
 
         }
 
