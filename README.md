@@ -1,2 +1,2 @@
 # **Important Notice**
-Currently this program is not working due to Letterboxd introducung new bot protection. Work is being done to get around this.
+Please look at the branch titles Selenium Scrapping for an updated working version
