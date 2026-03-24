@@ -1,2 +1,2 @@
 # **Important Notice**
-Please look at the branch titles Selenium Scrapping for an updated working version
+Please look at the branch titled Selenium Scrapping for an updated working version
